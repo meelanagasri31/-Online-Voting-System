@@ -1,0 +1,20 @@
+<%@ page import="java.sql.*" %>
+<%
+    Connection conn = com.voting.DBConnection.getConnection();
+    Statement stmt = conn.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * FROM candidates");
+%>
+<h2>Election Results:</h2>
+<table border="1">
+<tr><th>Candidate</th><th>Votes</th></tr>
+<%
+    while (rs.next()) {
+%>
+    <tr>
+        <td><%= rs.getString("name") %></td>
+        <td><%= rs.getInt("votes") %></td>
+    </tr>
+<%
+    }
+%>
+</table>
